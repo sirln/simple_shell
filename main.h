@@ -4,6 +4,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 
+extern char **environ;
 void exec(char **args);
 char *path_location(char *input);

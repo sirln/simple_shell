@@ -17,12 +17,11 @@ int main(int ap, char **args)
 	/*the infinite loop helps to print the prompt continously*/
 	while (1)
 	{
-	printf("%s", prompt);
+	write(1, prompt, strlen(prompt));
 
 	chars_read = getline(&lineptr, &k, stdin);
 	if (chars_read == -1)
 	{
-		printf("ASh Disconnecting...\n");
 		return (-1);
 	}
 
