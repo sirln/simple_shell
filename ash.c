@@ -18,7 +18,7 @@ void signal_handler(int sig_num)
 
 
 /**
-  *ash - get input/lsiro@tbm.co.kecommand
+  *ash - get input/command
   *
   *@command: command to be run
   */
@@ -26,7 +26,7 @@ void signal_handler(int sig_num)
 void ash(char **command)
 {
 	int status = 1;
-	char *cmd;
+	char *cmd, *args[256];
 
 	(void)command;
 	while (status)
@@ -39,7 +39,10 @@ void ash(char **command)
 			free(cmd);
 			continue;
 		}
-		parse_command(cmd, command);
-		status = run_command(command);
+		if (strcmp(cmd, "exit") == 0)
+			break;
+		parse_command(cmd, args);
+		status = run_command(args);
+		free(cmd);
 	}
 }

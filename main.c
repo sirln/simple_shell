@@ -12,9 +12,9 @@
 
 int main(int argc, char **argv)
 {
-        (void) argc;
+	(void) argc;
 
-        ash(argv);
+	ash(argv);
 
-        return (0);
+	return (0);
 }

@@ -8,6 +8,8 @@
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+
 extern char **environ;
 
 int main(int argc, char **argv);
@@ -17,5 +19,9 @@ void prompt(void);
 char *get_command(void);
 void parse_command(char *command, char **args);
 int run_command(char **command);
+
+char *find_command_path(char *command);
+
 int _putchar(char c);
+
 #endif
