@@ -19,7 +19,7 @@ int main(int ap, char **args)
 	{
 	write(1, prompt, strlen(prompt));
 
-	chars_read = getline(&lineptr, &k, stdin);
+	chars_read = _getline(&lineptr, &k, stdin);
 	if (chars_read == -1)
 	{
 		return (-1);
@@ -74,6 +74,6 @@ int main(int ap, char **args)
 	/*free(lineptr);*/
 	free(lineptr_copy);
 	}
-	
+
 	return (0);
 }
