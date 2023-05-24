@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+ * path_location - function that finds the path of a given command
+ * Return: NULL
+**/
+
 char *path_location(char *input)
 {
 	char *path, *path_copy, *path_token, *file_path;
@@ -10,26 +15,17 @@ char *path_location(char *input)
 
 	if (path)
 	{
-		/*creates a copy of the path*/
 		path_copy = strdup(path);
 	
-		/*this gets the length of command the user inputted*/
 		input_length = strlen(input);
 
-		/*breaking down the individual paths*/
 		path_token = strtok(path_copy, ":");
 
 		while(path_token != NULL)
 		{
-
-			/*Allocating memory for a new string that will hold
-	 		* the forward slash, the command, null terminating character*/
 			directory_length = strlen(path_token);
 
 			file_path = malloc(input_length + directory_length + 2);
-
-			/*copying token obtained in the file_path variable
-	 		* appending \, the command and null character as well*/
 
 			strcpy(file_path, path_token);
 			strcat(file_path, "/");

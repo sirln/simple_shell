@@ -40,12 +40,12 @@ int main(int ap, char **args)
 	/*Process of tokenisation: breaking the string to an array of words
 	 * counting the no. of tokens expected from the string*/
 
-	word = strtok(lineptr, delim);
+	word = _strtok(lineptr, delim);
 
 	while (word != NULL)
 	{
 		no_of_strings++;
-		word = strtok(NULL, delim);
+		word = _strtok(NULL, delim);
 	}
 	no_of_strings++;
 
@@ -55,14 +55,14 @@ int main(int ap, char **args)
 
 	/*storing each string(word) in the args array*/
 
-	word = strtok(lineptr_copy, delim);
+	word = _strtok(lineptr_copy, delim);
 
 	for (p = 0; word != NULL; p++)
 	{
 		args[p] = malloc(sizeof(char) * strlen(word));
 		strcpy(args[p], word);
 
-		word = strtok(NULL, delim);
+		word = _strtok(NULL, delim);
 	}
 	args[p] = NULL;
 
