@@ -32,6 +32,7 @@ extern char **environ;
 int main(int argc, char **argv);
 
 
+void signal_handler(int sig_num);
 void ash(char **command);
 void prompt(void);
 char *get_command(void);

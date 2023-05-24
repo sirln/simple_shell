@@ -6,7 +6,7 @@
 
 void prompt(void)
 {
-	char *prompt = "$ ";
+	char *prompt = "(ASh)~> ";
 	size_t len_prompt = _strlen(prompt);
 
 	write(STDOUT_FILENO, prompt, len_prompt);

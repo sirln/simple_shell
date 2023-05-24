@@ -30,18 +30,17 @@ void ash(char **command)
 	{
 		signal(SIGINT, signal_handler);
 		prompt();
-		/**
-		*cmd = get_command();
-		*if (cmd[0] == '\n')
-		*{
-		*	free(cmd);
-		*	continue;
-		*}
-		*parse_command(cmd, args);
-		*if (_strcmp(cmd, "exit") == 0)
-		*	exit(98);
-		*status = run_command(args);
-		*free(cmd);
-		*/
+
+		cmd = get_command();
+		if (cmd[0] == '\n')
+		{
+			free(cmd);
+			continue;
+		}
+		parse_command(cmd, args);
+		if (_strcmp(cmd, "exit") == 0)
+			exit(98);
+		status = run_command(args);
+		free(cmd);
 	}
 }
