@@ -14,9 +14,6 @@ void signal_handler(int sig_num)
 	}
 }
 
-
-
-
 /**
   *ash - get input/command
   *
@@ -39,9 +36,9 @@ void ash(char **command)
 			free(cmd);
 			continue;
 		}
-		if (strcmp(cmd, "exit") == 0)
-			break;
 		parse_command(cmd, args);
+		if (strcmp(cmd, "exit") == 0)
+			exit(98);
 		status = run_command(args);
 		free(cmd);
 	}

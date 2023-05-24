@@ -4,6 +4,8 @@
   *run_command - execute an inbuilt command
   *
   *@command: command to execute
+  *
+  *Return: 1 on success
   */
 int run_command(char **command)
 {

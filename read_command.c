@@ -10,7 +10,7 @@ void prompt(void)
 	size_t len_prompt = 0;
 
 	/* get length of prompt */
-	while(prompt[len_prompt] != '\0')
+	while (prompt[len_prompt] != '\0')
 		len_prompt++;
 
 	/* write prompt to screen / display shell prompt */
@@ -29,11 +29,11 @@ char *get_command(void)
 	ssize_t read;
 	size_t len_command = 0;
 
-	read = getline(&command, &len_command, stdin);
+	read = ash_getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
-		/*if(isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "\n", 1);*/
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, "\n", 1);
 		exit(EXIT_FAILURE);
 	}
 

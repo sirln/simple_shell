@@ -1,7 +1,10 @@
 #include "ash.h"
 
 /**
+  *parse_command - breaks down a command string
   *
+  *@command: string to break down
+  *@args: array to store vroken down strings
   */
 void parse_command(char *command, char **args)
 {
