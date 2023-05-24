@@ -9,12 +9,6 @@ void prompt(void)
 	char *prompt = "$ ";
 	size_t len_prompt = _strlen(prompt);
 
-	/* get length of prompt */
-	/*
-	*while (prompt[len_prompt] != '\0')
-	*	len_prompt++;
-	*/
-	/* write prompt to screen / display shell prompt */
 	write(STDOUT_FILENO, prompt, len_prompt);
 
 }

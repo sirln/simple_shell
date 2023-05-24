@@ -12,8 +12,8 @@
 
 int main(int argc, char **argv)
 {
-	(void) argc;
-
+	if (arg == 0)
+		return (-1);
 	ash(argv);
 
 	return (0);
