@@ -39,7 +39,10 @@ void ash(char **command)
 		}
 		parse_command(cmd, args);
 		if (_strcmp(cmd, "exit") == 0)
+		{
+			free(cmd);
 			exit(98);
+		}
 		status = run_command(args);
 		free(cmd);
 	}

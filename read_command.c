@@ -27,8 +27,7 @@ char *get_command(void)
 	read = getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
-		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "\n", 1);
+		free(command);
 		exit(EXIT_FAILURE);
 	}
 
