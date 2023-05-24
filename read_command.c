@@ -24,7 +24,7 @@ char *get_command(void)
 	ssize_t read;
 	size_t len_command = 0;
 
-	read = ash_getline(&command, &len_command, stdin);
+	read = getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
