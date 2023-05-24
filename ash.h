@@ -47,8 +47,15 @@ char *find_command_path(char *command);
 int _putchar(char c);
 void update_lineptr(char **lineptr, size_t *n, ssize_t total_chars);
 ssize_t ash_getline(char **lineptr, size_t *n, FILE *stream);
-void *ash_memcpy(void *dest, const void *src, size_t size);
+void *ash_memcpy(char *dest, char *src, size_t size);
 void *ash_realloc(void *ptr, size_t size);
 
+
+int _strlen(const char *s);
+int _strcmp(const char *s1, const char *s2);
+char *_strdup(const char *str);
+char *_strcpy(char *dest, const char *src);
+char *_strcat(char *dest, const char *src);
+int _strncmp(const char *str1, const char *str2, size_t n);
 
 #endif

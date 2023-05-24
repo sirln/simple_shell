@@ -10,15 +10,13 @@
   *Return: copy of memory
   *
   */
-void *ash_memcpy(void *dest, const void *src, size_t size)
+void *ash_memcpy(char *dest, char *src, size_t size)
 {
-	unsigned char *destination = (unsigned char *)dest;
-	const unsigned char *source = (const unsigned char *)src;
 	size_t l = 0;
 
 	while (l < size)
 	{
-		destination[l] = source[l];
+		dest[l] = src[l];
 		l++;
 	}
 	return (dest);

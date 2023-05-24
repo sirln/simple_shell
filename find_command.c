@@ -14,15 +14,15 @@ char *generate_command_path(const char *path, const char *command)
 {
 	char *command_path;
 
-	command_path = (char *)malloc(strlen(path) + strlen(command) + 2);
+	command_path = (char *)malloc(strlen(path) + _strlen(command) + 2);
 	if (!command_path)
 	{
 		perror("malloc error");
 		exit(EXIT_FAILURE);
 	}
-	strcpy(command_path, path);
-	strcat(command_path, "/");
-	strcat(command_path, command);
+	_strcpy(command_path, path);
+	_strcat(command_path, "/");
+	_strcat(command_path, command);
 	return (command_path);
 }
 
@@ -43,7 +43,7 @@ char *find_command_path(char *command)
 
 	while (environ[l])
 	{
-		if (strncmp(environ[l], "PATH=", 5) == 0)
+		if (_strncmp(environ[l], "PATH=", 5) == 0)
 		{
 			pathVariable = environ[l] + 5;
 			path = strtok(pathVariable, ":");
@@ -64,7 +64,7 @@ char *find_command_path(char *command)
 				exit(EXIT_FAILURE);
 			}
 			else
-				return (strdup(command));
+				return (_strdup(command));
 		}
 		l++;
 	}
