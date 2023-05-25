@@ -9,7 +9,7 @@
 void parse_command(char *command, char **args)
 {
 	char *token;
-	char *delimiters = " \t\n";
+	char *delimiters = " ";
 	int i_arg = 0;
 
 	token = strtok(command, delimiters);
