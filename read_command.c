@@ -26,7 +26,7 @@ char *get_command(void)
 	ssize_t read;
 	size_t len_command = 0;
 
-	read = getline(&command, &len_command, stdin);
+	read = ash_getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
 		perror("Error reading command");
