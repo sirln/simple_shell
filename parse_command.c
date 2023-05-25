@@ -6,6 +6,7 @@
   *@command: string to break down
   *@args: array to store vroken down strings
   */
+
 void parse_command(char *command, char **args)
 {
 	char *token;
@@ -21,3 +22,4 @@ void parse_command(char *command, char **args)
 	}
 	args[i_arg] = NULL;
 }
+
