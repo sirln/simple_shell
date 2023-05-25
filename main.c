@@ -14,6 +14,7 @@ int main(int argc, char **argv)
 {
 	if (argc == 0)
 		return (-1);
+
 	ash(argv);
 
 	return (0);

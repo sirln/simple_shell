@@ -32,6 +32,7 @@ extern char **environ;
 int main(int argc, char **argv);
 
 
+void free_args(char **args);
 void signal_handler(int sig_num);
 void ash(char **command);
 void prompt(void);
@@ -58,5 +59,8 @@ char *_strdup(const char *str);
 char *_strcpy(char *dest, const char *src);
 char *_strcat(char *dest, const char *src);
 int _strncmp(const char *str1, const char *str2, size_t n);
+
+unsigned int compare_delim(char p, const char *str);
+char *_strtok(char *str, const char *delim);
 
 #endif

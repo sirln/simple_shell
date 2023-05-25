@@ -14,7 +14,7 @@ char *generate_command_path(const char *path, const char *command)
 {
 	char *command_path;
 
-	command_path = (char *)malloc(strlen(path) + _strlen(command) + 2);
+	command_path = (char *)malloc(_strlen(path) + _strlen(command) + 2);
 	if (!command_path)
 	{
 		perror("malloc error");
@@ -46,7 +46,7 @@ char *find_command_path(char *command)
 		if (_strncmp(environ[l], "PATH=", 5) == 0)
 		{
 			pathVariable = environ[l] + 5;
-			path = strtok(pathVariable, ":");
+			path = _strtok(pathVariable, ":");
 
 			while (path)
 			{
@@ -55,7 +55,7 @@ char *find_command_path(char *command)
 				if (access(command_path, F_OK) == 0)
 					return (command_path);
 
-				path = strtok(NULL, ":");
+				path = _strtok(NULL, ":");
 				free(command_path);
 			}
 			if (stat(command, &statbuff) == -1)

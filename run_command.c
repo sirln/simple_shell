@@ -27,9 +27,13 @@ int run_command(char **command)
 			perror("Command not found");
 			exit(EXIT_FAILURE);
 		}
-		execve(command_path, command, environ);
-		perror("Execve failed");
-		_exit(EXIT_FAILURE);
+
+		if (execve(command_path, command, environ) == -1)
+		{
+			perror("Execve failed");
+			exit(EXIT_FAILURE);
+		}
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{

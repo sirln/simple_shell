@@ -18,6 +18,8 @@ void prompt(void)
   *
   *Return: input string
   */
+
+
 char *get_command(void)
 {
 	char *command = NULL;
@@ -27,9 +29,10 @@ char *get_command(void)
 	read = getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
-		free(command);
+		perror("Error reading command");
 		exit(EXIT_FAILURE);
 	}
+	/*command[strcspn(command, "\n")] = '\0';*/
 
 	return (command);
 }
