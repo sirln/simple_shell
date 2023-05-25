@@ -9,7 +9,8 @@ void prompt(void)
 	char *prompt = "(ASh)~> ";
 	size_t len_prompt = _strlen(prompt);
 
-	write(STDOUT_FILENO, prompt, len_prompt);
+	if (isatty(STDIN_FILENO) == 1)
+		write(STDOUT_FILENO, prompt, len_prompt);
 
 }
 
@@ -29,12 +30,12 @@ char *get_command(void)
 	read = ash_getline(&command, &len_command, stdin);
 	if (read == -1)
 	{
-		perror("Error reading command");
-		exit(EXIT_FAILURE);
+		return (NULL);
 	}
 	command[strcspn(command, "\n")] = '\0';
 
 	return (command);
 }
+
 
 

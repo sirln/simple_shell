@@ -29,12 +29,12 @@ void ash(char **command  __attribute__((unused)))
 	while (status)
 	{
 		prompt();
-		fflush(stdout);
+
 		cmd = get_command();
 		if (cmd == NULL || cmd[0] == '\n')
 		{
 			free(cmd);
-			continue;
+			break;
 		}
 		args = malloc(sizeof(char *) * 1024);
 		if (args == NULL)
