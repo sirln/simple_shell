@@ -20,12 +20,11 @@ void signal_handler(int sig_num)
   *@command: command to be run
   */
 
-void ash(char **command)
+void ash(char **command  __attribute__((unused)))
 {
 	int status = 1;
 	char *cmd = NULL, **args = NULL;
 
-	(void)command;
 	while (status)
 	{
 		signal(SIGINT, SIG_DFL);
@@ -40,7 +39,6 @@ void ash(char **command)
 		args = malloc(sizeof(char *) * 256);
 		if (args == NULL)
 		{
-			perror("Memory allocation failed");
 			free(cmd);
 			exit(EXIT_FAILURE);
 		}

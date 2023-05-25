@@ -34,7 +34,8 @@ int main(int argc, char **argv);
 
 void free_args(char **args);
 void signal_handler(int sig_num);
-void ash(char **command);
+void ash(char **command  __attribute__((unused)));
+/*void ash(char **command) __attribute__((unused));*/
 void prompt(void);
 char *get_command(void);
 void parse_command(char *command, char **args);
