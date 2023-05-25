@@ -12,7 +12,7 @@ void parse_command(char *command, char **args)
 	char *delimiters = " ";
 	int i_arg = 0;
 
-	token = strtok(command, delimiters);
+	token = _strtok(command, delimiters);
 	while (token)
 	{
 		args[i_arg] = token;
