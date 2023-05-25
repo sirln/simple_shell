@@ -32,7 +32,7 @@ char *get_command(void)
 		perror("Error reading command");
 		exit(EXIT_FAILURE);
 	}
-	/*command[strcspn(command, "\n")] = '\0';*/
+	command[strcspn(command, "\n")] = '\0';
 
 	return (command);
 }

@@ -25,18 +25,18 @@ void ash(char **command  __attribute__((unused)))
 	int status = 1;
 	char *cmd = NULL, **args = NULL;
 
+	signal(SIGINT, signal_handler);
 	while (status)
 	{
-		signal(SIGINT, SIG_DFL);
 		prompt();
-
+		fflush(stdout);
 		cmd = get_command();
 		if (cmd == NULL || cmd[0] == '\n')
 		{
 			free(cmd);
 			continue;
 		}
-		args = malloc(sizeof(char *) * 256);
+		args = malloc(sizeof(char *) * 1024);
 		if (args == NULL)
 		{
 			free(cmd);
