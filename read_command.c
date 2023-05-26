@@ -23,18 +23,18 @@ void prompt(void)
 
 char *get_command(void)
 {
-	char *command = NULL;
-	ssize_t read;
-	size_t len_command = 0;
+	char *line = NULL;
+	ssize_t chars;
+	size_t len_line = 0;
 
-	read = ash_getline(&command, &len_command, stdin);
-	if (read == -1)
+	chars = ash_getline(&line, &len_line, stdin);
+	if (chars == -1)
 	{
 		return (NULL);
 	}
-	command[strcspn(command, "\n")] = '\0';
+	line[strcspn(line, "\n")] = '\0';
 
-	return (command);
+	return (line);
 }
 
 

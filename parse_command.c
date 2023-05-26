@@ -1,25 +1,77 @@
 #include "ash.h"
 
 /**
-  *parse_command - breaks down a command string
+  * parse_command - Parses the command recieved from stdin
   *
-  *@command: string to break down
-  *@args: array to store vroken down strings
+  * @input: String gathered from stdin
+  *
+  * Return: Parsed strings to be used as arguments
   */
-
-void parse_command(char *command, char **args)
+char **parse_command(char *input)
 {
-	char *token;
-	char *delimiters = " ";
-	int i_arg = 0;
+	char *delimiters = " \n\t\r\a";
+	char **arguments;
+	char *argument;
+	int i;
+	int buffsize = BUFSIZE;
 
-	token = _strtok(command, delimiters);
-	while (token)
+	if (input[0] == ' ' && input[_strlen(input)] == ' ')
+		exit(0);
+	if (input == NULL)
+		return (NULL);
+	arguments = malloc(sizeof(char *) * buffsize);
+	if (!arguments)
 	{
-		args[i_arg] = token;
-		i_arg++;
-		token = _strtok(NULL, delimiters);
+		free(arguments);
+		perror("hsh");
+		return (NULL);
 	}
-	args[i_arg] = NULL;
+	argument = _strtok(input, delimiters);
+	for (i = 0; argument; i++)
+	{
+		arguments[i] = argument;
+		argument = _strtok(NULL, delimiters);
+	}
+	arguments[i] = NULL;
+
+	return (arguments);
 }
 
+
+
+/**
+  * separate_commands - separate command recieved from stdin
+  *
+  * @input: String gathered from stdin
+  *
+  * Return: Parsed strings to be used as commands
+  */
+char **separate_commands(char *input)
+{
+	char *delimiters = ";&";
+	char **arguments;
+	char *argument;
+	int i;
+	int buffsize = BUFSIZE;
+
+	if (input[0] == ' ' && input[_strlen(input)] == ' ')
+		exit(0);
+	if (input == NULL)
+		return (NULL);
+	arguments = malloc(sizeof(char *) * buffsize);
+	if (!arguments)
+	{
+		free(arguments);
+		perror("hsh");
+		return (NULL);
+	}
+	argument = _strtok(input, delimiters);
+	for (i = 0; argument; i++)
+	{
+		arguments[i] = argument;
+		argument = _strtok(NULL, delimiters);
+	}
+	arguments[i] = NULL;
+
+	return (arguments);
+}

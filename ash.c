@@ -10,78 +10,46 @@ void signal_handler(int sig_num)
 	if (sig_num == SIGINT)
 	{
 		_putchar('\n');
-		exit(0);
+		prompt();
 	}
 }
 
 /**
-  *ash - get input/command
+  *ash - ash shell program
   *
-  *@command: command to be run
+  *Return: program status
   */
 
-void ash(char **command  __attribute__((unused)))
+int ash(void)
 {
 	int status = 1;
-	char *cmd = NULL, **args = NULL;
+	char **cmd, **commands, *input;
 
 	signal(SIGINT, signal_handler);
 	while (status)
 	{
 		prompt();
 
-		cmd = get_command();
-		if (cmd == NULL || cmd[0] == '\n')
+		input = get_command();
+		if (!input || input[0] == '\n')
 		{
-			free(cmd);
+			free(input);
 			break;
 		}
-		args = malloc(sizeof(char *) * 1024);
-		if (args == NULL)
+		commands = separate_commands(input);
+		cmd = parse_command(*commands);
+		if (_strcmp(cmd[0], "exit") == 0)
 		{
 			free(cmd);
-			exit(EXIT_FAILURE);
-		}
-
-		parse_command(cmd, args);
-		if (args == NULL)
-		{
-			free(cmd);
-			free(args);
-			continue;
-		}
-
-		if (_strcmp(cmd, "exit") == 0)
-		{
-			free(cmd);
-			free(args);
+			free(commands);
+			free(input);
 			exit(98);
 		}
 
-		status = run_command(args);
-
-		free_args(args);
+		status = run_command(cmd);
+		free(cmd);
+		free(commands);
+		free(input);
 	}
-}
-
-/**
-  *free_args - frees memory
-  *
-  *@args: variable to deallocate memory
-  *
-  */
-void free_args(char **args)
-{
-	int l = 0;
-
-	if (args == NULL)
-		return;
-
-	while (args[l] != NULL)
-	{
-		free(args[l]);
-		l++;
-	}
-
-	free(args);
+	return (status);
 }
