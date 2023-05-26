@@ -22,7 +22,7 @@ void signal_handler(int sig_num)
 
 int ash(void)
 {
-	int status = 1;
+	int status = 1, stat = 0;
 	char **cmd, **commands, *input;
 
 	signal(SIGINT, signal_handler);
@@ -43,13 +43,14 @@ int ash(void)
 			free(cmd);
 			free(commands);
 			free(input);
-			exit(0);
+			exit(stat);
 		}
 
-		status = run_command(cmd);
+		stat = run_command(cmd);
 		free(cmd);
 		free(commands);
 		free(input);
+		wait(&stat);
 	}
 	return (status);
 }

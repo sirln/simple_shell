@@ -19,29 +19,30 @@ int run_command(char **command)
 		perror("Fork failed");
 		exit(EXIT_FAILURE);
 	}
-	else if (child_pid == 0)
+
+	if (child_pid == 0)
 	{
 		command_path = find_command_path(command[0]);
 		if (!command_path)
 		{
-			perror("Command not found");
-			exit(EXIT_FAILURE);
+			free(command_path);
+			exit(2);
 		}
 
 		if (execve(command_path, command, environ) == -1)
 		{
-			perror("Execve failed");
-			exit(EXIT_FAILURE);
+			return (2);
 		}
-		exit(EXIT_SUCCESS);
+		else
+			return (0);
 	}
 	else
 	{
 		if (waitpid(child_pid, &wstatus, 0) == -1)
 		{
 			perror("Waitpid failed");
-			exit(EXIT_FAILURE);
+			return (WEXITSTATUS(wstatus));
 		}
 	}
-	return (1);
+	return (WEXITSTATUS(wstatus));
 }

@@ -36,7 +36,7 @@ void update_lineptr(char **lineptr, size_t *n, ssize_t total_chars)
   */
 ssize_t ash_getline(char **lineptr, size_t *n, FILE *stream)
 {
-	static char buffer[1024];
+	static char buffer[BUFSIZE];
 	ssize_t total_chars = 0;
 	ssize_t buffer_size = (ssize_t)sizeof(buffer);
 	size_t char_size = sizeof(char);
