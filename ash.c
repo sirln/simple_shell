@@ -43,7 +43,7 @@ int ash(void)
 			free(cmd);
 			free(commands);
 			free(input);
-			exit(98);
+			exit(0);
 		}
 
 		status = run_command(cmd);
