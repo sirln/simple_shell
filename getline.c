@@ -1,13 +1,24 @@
 #include "main.h"
 
-/*it returns a pointer to the newly allocated memory block*/
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t p);
+ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
+
+/**
+ * _realloc - function that reallocates memory
+ * @ptr: A pointer to the memory that was allocated previously
+ * @old_size: The size in bytes for the space allocated for the ptr
+ * @new_size: The size in bytes for the new memory block created
+ * Return: if new_size == old_size - ptr
+ * if new_size == 0 & ptr is not NULL - NULL
+ * otherwise a ptr to the reallocated memory block
+**/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *new_mem;
 	char *ptr_copy, *filler;
 	unsigned int i;
-	
-	/*function returns original pointer as there's no need to re-size memory*/
+
 	if (new_size == old_size)
 		return (ptr);
 
@@ -33,10 +44,8 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		free(ptr);
 		return (NULL);
 	}
-	/*the new_mem is stored in the char variable filler*/
 	filler = new_mem;
 
-	/*the function copies the contents of old memory to the new memory*/
 	for (i = 0; i < old_size && i < new_size; i++)
 		filler[i] = *ptr_copy++;
 
@@ -45,25 +54,23 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 }
 
 
-/*a helper function that is used to assign a pointer to lineptr to a bew buffer*/
+/**
+ * assign_lineptr - reassigns the lineptr variable for _getline
+ * @lineptr: parameter
+ * @n: size of linptr
+ * @buffer: string to assign to the lineptr
+ * @p: The size of the buffer
+**/
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t p)
-{	
+{
 	if (*lineptr == NULL)
-	{	/*n is size of lineptr and p is the size of the buffer*/
-		if (p > 200)
-			*n = p;
-		else
-			*n = 200;
-		*lineptr = buffer;
-	}
-	/*else if (*n < p)
 	{
 		if (p > 200)
 			*n = p;
 		else
 			*n = 200;
 		*lineptr = buffer;
-	}*/
+	}
 	else
 	{
 		strcpy(*lineptr, buffer);
@@ -71,17 +78,23 @@ void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t p)
 	}
 }
 
-/*This function reads the input and returns the no. of bytes read*/
+/**
+ * _getline - function that reads the input from a stream
+ * @lineptr: the buffer that stores the input
+ * @n: The size of the lineptr
+ * @stream: The stream to read the input from
+ * Return: The total number of bytes read
+**/
 
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 {
-	static ssize_t input; /*variable used to keep track of the no. of characters read so far*/
-	ssize_t np; /*stores the no. of characters read*/
-	char s = 'x', *buffer; /*s stores the current character read & buffer stores the line*/
+	static ssize_t input;
+	ssize_t np;
+	char s = 'x', *buffer;
 	int p;
 
 	if (input == 0)
-		fflush(stream); /*to ensure any buffered data is written to the file*/
+		fflush(stream);
 	else
 		return (-1);
 	input = 0;
@@ -90,11 +103,11 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 	if (buffer == NULL)
 		return (-1);
 
-	while (s != '\n') /*reads characters from the file stream until newline character*/
+	while (s != '\n')
 	{
 		p = read(STDIN_FILENO, &s, 1);
 		if (p == -1 || (p == 0 && input == 0))
-		{	/*if the EOF and no characters read/error occured, the function frees the buffer*/
+		{
 			free(buffer);
 			return (-1);
 		}
@@ -103,8 +116,7 @@ ssize_t _getline(char **lineptr, size_t *n, FILE *stream)
 			input++;
 			break;
 		}
-		
-		/*the function re-allocates memory for the buffer variable*/
+
 		if (input >= 200)
 			buffer = _realloc(buffer, input, input + 1);
 
