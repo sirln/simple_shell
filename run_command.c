@@ -39,10 +39,7 @@ int run_command(char **command)
 	else
 	{
 		if (waitpid(child_pid, &wstatus, 0) == -1)
-		{
-			perror("Waitpid failed");
 			return (WEXITSTATUS(wstatus));
-		}
 	}
 	return (WEXITSTATUS(wstatus));
 }
