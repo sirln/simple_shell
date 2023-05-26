@@ -59,17 +59,20 @@ int _strcmp(const char *s1, const char *s2)
  */
 char *_strcat(char *dest, const char *src)
 {
-	int l, n;
+	char *new_string = dest;
 
-	for (l = 0; dest[l] != '\0'; l++)
-	{}
+	while (*dest != '\0')
+		dest++;
 
-	for (n = 0; src[n] != '\0'; n++)
+	while (*src != '\0')
 	{
-		dest[l + n] = src[n];
+		*dest = *src;
+		dest++;
+		src++;
 	}
+	*dest = '\0';
 
-	return (dest);
+	return (new_string);
 }
 
 
