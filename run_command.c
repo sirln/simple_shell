@@ -11,7 +11,7 @@ int run_command(char **command)
 {
 	pid_t child_pid;
 	int wstatus;
-	/*char *command_path;*/
+	char *command_path;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -19,20 +19,27 @@ int run_command(char **command)
 		perror("Fork failed");
 		exit(EXIT_FAILURE);
 	}
-	else if (child_pid == 0)
+
+	if (child_pid == 0)
 	{
-		if (execve(*command, command, environ) == -1)
+		command_path = find_command_path(command[0]);
+		if (!command_path)
+		{
+			free(command_path);
+			exit(2);
+		}
+
+		if (execve(command_path, command, environ) == -1)
+		{
 			return (2);
-		return (0);
+		}
+		else
+			return (0);
 	}
 	else
 	{
 		if (waitpid(child_pid, &wstatus, 0) == -1)
-		{
-			perror("Waitpid failed");
 			return (WEXITSTATUS(wstatus));
-		}
 	}
-
 	return (WEXITSTATUS(wstatus));
 }

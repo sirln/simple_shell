@@ -1,83 +1,77 @@
 #include "ash.h"
 
 /**
-  *parse_command - parse command given from stdin
+  * parse_command - Parses the command recieved from stdin
   *
-  *@input: input from stdin
+  * @input: String gathered from stdin
   *
-  *Return: parsed strings to be used as arguments
+  * Return: Parsed strings to be used as arguments
   */
-
 char **parse_command(char *input)
 {
-	char **commands;
-	char *command;
-	int i_arg = 0;
-	size_t input_len;
-	size_t buffsize = 1024;
-	char *delimiters = "\n\t\r\a ";
+	char *delimiters = " \n\t\r\a";
+	char **arguments;
+	char *argument;
+	int i;
+	int buffsize = BUFSIZE;
 
-	input_len = _strlen(input);
-	if (input[0] == ' ' && input[input_len] == ' ')
+	if (input[0] == ' ' && input[_strlen(input)] == ' ')
 		exit(0);
-	if (!input)
+	if (input == NULL)
 		return (NULL);
-	commands = malloc(sizeof(char *) * buffsize);
-	if (!commands)
+	arguments = malloc(sizeof(char *) * buffsize);
+	if (!arguments)
 	{
-		free(commands);
+		free(arguments);
+		perror("hsh");
 		return (NULL);
 	}
-	command = _strtok(input, delimiters);
-	while (command)
+	argument = _strtok(input, delimiters);
+	for (i = 0; argument; i++)
 	{
-		commands[i_arg] = command;
-		i_arg++;
-		command = _strtok(NULL, delimiters);
+		arguments[i] = argument;
+		argument = _strtok(NULL, delimiters);
 	}
-	commands[i_arg] = NULL;
+	arguments[i] = NULL;
 
-	return (commands);
+	return (arguments);
 }
 
 
 
 /**
-  *separate_command - separate command given from stdin
+  * separate_commands - separate command recieved from stdin
   *
-  *@input: input from stdin
+  * @input: String gathered from stdin
   *
-  *Return: parsed strings to be used as commands
+  * Return: Parsed strings to be used as commands
   */
-
-char **separate_command(char *input)
+char **separate_commands(char *input)
 {
-	char **commands;
-	char *command;
-	int i_arg = 0;
-	size_t input_len;
-	size_t buffsize = 1024;
-	char *delimiters = "&;";
+	char *delimiters = ";&";
+	char **arguments;
+	char *argument;
+	int i;
+	int buffsize = BUFSIZE;
 
-	input_len = _strlen(input);
-	if (input[0] == ' ' && input[input_len] == ' ')
+	if (input[0] == ' ' && input[_strlen(input)] == ' ')
 		exit(0);
-	if (!input)
+	if (input == NULL)
 		return (NULL);
-	commands = malloc(sizeof(char *) * buffsize);
-	if (!commands)
+	arguments = malloc(sizeof(char *) * buffsize);
+	if (!arguments)
 	{
-		free(commands);
+		free(arguments);
+		perror("hsh");
 		return (NULL);
 	}
-	command = _strtok(input, delimiters);
-	while (command)
+	argument = _strtok(input, delimiters);
+	for (i = 0; argument; i++)
 	{
-		commands[i_arg] = command;
-		i_arg++;
-		command = _strtok(NULL, delimiters);
+		arguments[i] = argument;
+		argument = _strtok(NULL, delimiters);
 	}
-	commands[i_arg] = NULL;
+	arguments[i] = NULL;
 
-	return (commands);
+	return (arguments);
 }

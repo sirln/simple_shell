@@ -28,12 +28,12 @@ unsigned int compare_delim(char p, const char *str)
 
 char *_strtok(char *str, const char *delim)
 {
-	static char *current, *new_token;
+	static char *current, *new;
 	unsigned int k;
 
 	if (str != NULL)
-		new_token = str;
-	current = new_token;
+		new = str;
+	current = new;
 	if (current == NULL)
 		return (NULL);
 	for (k = 0; current[k] != '\0'; k++)
@@ -41,26 +41,26 @@ char *_strtok(char *str, const char *delim)
 		if (compare_delim(current[k], delim) == 0)
 			break;
 	}
-	if (new_token[k] == '\0')
+	if (new[k] == '\0')
 	{
-		new_token = NULL;
+		new = NULL;
 		return (NULL);
 	}
-	current = new_token + k;
-	new_token = current;
-	for (k = 0; new_token[k] != '\0'; k++)
+	current = new + k;
+	new = current;
+	for (k = 0; new[k] != '\0'; k++)
 	{
-		if (compare_delim(new_token[k], delim) == 1)
+		if (compare_delim(new[k], delim) == 1)
 			break;
 	}
-	if (new_token[k] == '\0')
-		new_token = NULL;
+	if (new[k] == '\0')
+		new = NULL;
 	else
 	{
-		new_token[k] = '\0';
-		new_token = new_token + k + 1;
-		if (*new_token == '\0')
-			new_token = NULL;
+		new[k] = '\0';
+		new = new + k + 1;
+		if (*new == '\0')
+			new = NULL;
 	}
 	return (current);
 }
