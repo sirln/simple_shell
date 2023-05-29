@@ -23,10 +23,12 @@ int _putchar(char c)
   */
 int _strlen(const char *s)
 {
-	int l;
+	int l = 0;
 
-	for (l = 0; s[l] != '\0'; l++)
-	{}
+	while (s[l] != '\0')
+	{
+		l++;
+	}
 
 	return (l);
 }

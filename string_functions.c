@@ -14,12 +14,12 @@ char *_strcpy(char *dest, const char *src)
 {
 	int l = 0;
 
-	while (l <= _strlen(src))
+	while (src[l])
 	{
 		dest[l] = src[l];
 		l++;
 	}
-
+	dest[l] = '\0';
 	return (dest);
 }
 
@@ -71,7 +71,6 @@ char *_strcat(char *dest, const char *src)
 		src++;
 	}
 	*dest = '\0';
-
 	return (new_string);
 }
 
