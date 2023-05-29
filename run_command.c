@@ -21,12 +21,6 @@ int run_command(char **command)
 	}
 	else if (child_pid == 0)
 	{
-		/*command_path = find_command_path(command[0]);
-		if (!command_path)
-		{
-			perror("Command not found");
-			exit(EXIT_FAILURE);
-		}*/
 		if (execve(*command, command, environ) == -1)
 			return (2);
 		return (0);

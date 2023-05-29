@@ -17,6 +17,7 @@ void signal_handler(int sig_num)
 /**
   *ash - ash shell program
   *
+  *Return: program status
   */
 
 int ash(void)
@@ -49,3 +50,4 @@ int ash(void)
 	}
 	return (status);
 }
+
