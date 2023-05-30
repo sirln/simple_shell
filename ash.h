@@ -33,12 +33,15 @@ extern char **environ;
 
 int main(int argc, char **argv);
 
-void prompt(void);
-void free_args(char **args);
 void signal_handler(int sig_num);
-
 int ash(void);
+
+void prompt(void);
 char *get_command(void);
+char *handle_enter(char *string);
+char *handle_space(char *string);
+void handle_hashtag(char *buff);
+
 int run_command(char **command);
 
 
