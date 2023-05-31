@@ -22,7 +22,7 @@ void signal_handler(int sig_num)
 
 int ash(void)
 {
-	int status = 1, stat = 0;
+	int status = 1, stat = 0, x = 0;
 	char **cmd, **commands, *input;
 
 	signal(SIGINT, signal_handler);
@@ -31,30 +31,29 @@ int ash(void)
 		prompt();
 
 		input = get_command();
-		if (!input || input[0] == '\n')
-		{
-			free(input);
-			break;
-		}
-		commands = separate_commands(input);
-		cmd = parse_command(*commands);
-		if (_strcmp(cmd[0], "exit") == 0)
-		{
-			free(cmd);
-			free(commands);
-			free(input);
-			exit(stat);
-		}
-		else if (check_builtin(cmd) == 0)
-		{
-			stat = convert_builtin(cmd, stat);
-			free(cmd);
+		if (input[0] == '\0')
 			continue;
+		commands = separate_commands(input);
+		for (; commands[x]; x++)
+		{
+			cmd = parse_command(*commands);
+			if (_strcmp(cmd[0], "exit") == 0)
+			{
+				free(cmd);
+				free(commands);
+				free(input);
+				exit(stat);
+			}
+			else if (check_builtin(cmd) == 0)
+			{
+				stat = convert_builtin(cmd, stat);
+				free(cmd);
+				continue;
+			}
+			else
+				stat = run_command(cmd);
+			free(cmd);
 		}
-		else
-			stat = run_command(cmd);
-
-		free(cmd);
 		free(commands);
 		free(input);
 		wait(&stat);

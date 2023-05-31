@@ -9,16 +9,17 @@
   */
 char **parse_command(char *input)
 {
-	char *delimiters = " \n\t\r\a ";
+	char *delimiters = "\n\t\r\a ";
 	char **arguments;
 	char *argument;
-	int i;
+	int i = 0;
 	int buffsize = BUFSIZE;
+	int input_len = _strlen(input);
 
-	if (input[0] == ' ' && input[_strlen(input)] == ' ')
-		exit(0);
 	if (input == NULL)
 		return (NULL);
+	if (input[0] == ' ' && input[input_len] == ' ')
+		exit(0);
 	arguments = malloc(sizeof(char *) * buffsize);
 	if (!arguments)
 	{
@@ -27,7 +28,7 @@ char **parse_command(char *input)
 		return (NULL);
 	}
 	argument = _strtok(input, delimiters);
-	for (i = 0; argument; i++)
+	for (; argument; i++)
 	{
 		arguments[i] = argument;
 		argument = _strtok(NULL, delimiters);
@@ -51,13 +52,15 @@ char **separate_commands(char *input)
 	char *delimiters = ";&";
 	char **arguments;
 	char *argument;
-	int i;
+	int i = 0;
 	int buffsize = BUFSIZE;
+	int input_len = _strlen(input);
 
-	if (input[0] == ' ' && input[_strlen(input)] == ' ')
-		exit(0);
 	if (input == NULL)
 		return (NULL);
+	if (input[0] == ' ' && input[input_len] == ' ')
+		exit(0);
+
 	arguments = malloc(sizeof(char *) * buffsize);
 	if (!arguments)
 	{
@@ -66,7 +69,7 @@ char **separate_commands(char *input)
 		return (NULL);
 	}
 	argument = _strtok(input, delimiters);
-	for (i = 0; argument; i++)
+	for (; argument; i++)
 	{
 		arguments[i] = argument;
 		argument = _strtok(NULL, delimiters);
