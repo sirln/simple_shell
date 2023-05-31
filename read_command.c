@@ -25,6 +25,7 @@ char *get_command(void)
 {
 	int l = 0, rd, buffsize = BUFSIZE;
 	char c = 0, *buffer, *buf;
+	int flag = 0;
 
 	buffer = malloc(buffsize);
 	if (!buffer)
@@ -42,6 +43,11 @@ char *get_command(void)
 			free(buffer);
 			exit(EXIT_SUCCESS);
 		}
+		if (flag == 0 && c == ' ')
+			continue;
+		else
+			flag = 1;
+
 		buffer[l] = c;
 		if (buffer[0] == '\n')
 			return (handle_enter(buffer));
