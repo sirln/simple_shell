@@ -44,12 +44,17 @@ extern char **environ;
 
 int main(int argc, char **argv);
 
-void prompt(void);
-void free_args(char **args);
 void signal_handler(int sig_num);
-
 int ash(void);
+
+
+void prompt(void);
 char *get_command(void);
+char *handle_enter(char *string);
+char *handle_space(char *string);
+void handle_hashtag(char *buff);
+
+
 int run_command(char **command);
 
 
@@ -61,8 +66,6 @@ char *generate_command_path(const char *path, const char *command);
 char *find_command_path(char *command);
 
 
-void update_lineptr(char **lineptr, size_t *n, ssize_t total_chars);
-ssize_t ash_getline(char **lineptr, size_t *n, FILE *stream);
 void *ash_memcpy(char *dest, char *src, size_t size);
 void *ash_realloc(void *ptr, size_t size);
 
