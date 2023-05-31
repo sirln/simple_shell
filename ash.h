@@ -1,7 +1,7 @@
 #ifndef ASH_SHELL
 #define ASH_SHELL
 
-#define BUFSIZE 1024
+#define BUFSIZE 10240
 
 #include <stdio.h>
 #include <stdlib.h>
