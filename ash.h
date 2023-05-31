@@ -27,21 +27,29 @@ typedef struct memory
 	char *data;
 } memory_block;
 
+/**
+ * struct builtin_f - defines shell builtin commands
+ * @name: name of the builtin command
+ * @function: a function ptr to the builtin
+**/
+typedef struct builtin_f
+{
+	char *name;
+	int (*function)(char **argv, int status);
+} builtin_d;
+
 
 extern char **environ;
 
 
 int main(int argc, char **argv);
 
-void signal_handler(int sig_num);
-int ash(void);
-
 void prompt(void);
-char *get_command(void);
-char *handle_enter(char *string);
-char *handle_space(char *string);
-void handle_hashtag(char *buff);
+void free_args(char **args);
+void signal_handler(int sig_num);
 
+int ash(void);
+char *get_command(void);
 int run_command(char **command);
 
 
@@ -71,5 +79,9 @@ int _strncmp(const char *str1, const char *str2, size_t n);
 
 unsigned int compare_delim(char p, const char *str);
 char *_strtok(char *str, const char *delim);
+
+int ash_env(char **args, int status);
+int convert_builtin(char **command, int status);
+int check_builtin(char **command);
 
 #endif

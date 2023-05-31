@@ -31,9 +31,10 @@ int ash(void)
 		prompt();
 
 		input = get_command();
-		if (input[0] == '\0')
+		if (!input || input[0] == '\n')
 		{
-			continue;
+			free(input);
+			break;
 		}
 		commands = separate_commands(input);
 		cmd = parse_command(*commands);
@@ -44,8 +45,15 @@ int ash(void)
 			free(input);
 			exit(stat);
 		}
+		else if (check_builtin(cmd) == 0)
+		{
+			stat = convert_builtin(cmd, stat);
+			free(cmd);
+			continue;
+		}
+		else
+			stat = run_command(cmd);
 
-		stat = run_command(cmd);
 		free(cmd);
 		free(commands);
 		free(input);
