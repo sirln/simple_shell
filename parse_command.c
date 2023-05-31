@@ -9,7 +9,7 @@
   */
 char **parse_command(char *input)
 {
-	char *delimiters = "\n\t\r\a ";
+	char *delimiters = " \n\t\r\a ";
 	char **arguments;
 	char *argument;
 	int i = 0;
@@ -49,7 +49,7 @@ char **parse_command(char *input)
   */
 char **separate_commands(char *input)
 {
-	char *delimiters = " ;&";
+	char *delimiters = ";&";
 	char **arguments;
 	char *argument;
 	int i = 0;
