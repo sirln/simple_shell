@@ -33,7 +33,7 @@ int ash(void)
 		input = get_command();
 		if (!input || input[0] == '\0')
 		{
-			continue;
+			break;
 		}
 		commands = separate_commands(input);
 		cmd = parse_command(*commands);
