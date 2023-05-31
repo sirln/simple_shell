@@ -31,10 +31,9 @@ int ash(void)
 		prompt();
 
 		input = get_command();
-		if (!input || input[0] == '\n')
+		if (!input || input[0] == '\0')
 		{
-			free(input);
-			break;
+			continue;
 		}
 		commands = separate_commands(input);
 		cmd = parse_command(*commands);
